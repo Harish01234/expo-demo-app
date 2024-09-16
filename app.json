@@ -31,6 +31,12 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2480a0d6-80be-471d-8522-69cbf62e0daa"
+      }
+    },
+    "owner": "harishmalakar"
   }
 }
