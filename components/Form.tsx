@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import {useReminderStore} from '@/store/store';
 
 function secondsUntil(dateString: Date): number {
   // Get the current time
@@ -22,6 +22,12 @@ const ReminderForm = () => {
   const [time, setTime] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
 
+  //zustand store data
+  const { setTaskNamee, setReminderTime, setSecond } = useReminderStore();
+
+
+  
+
   // Function to handle time change
   const onChange = (event: any, selectedTime?: Date) => {
     const currentTime = selectedTime || time;
@@ -37,6 +43,9 @@ const ReminderForm = () => {
   const handleSubmit = () => {
     console.log(taskName, time);
     console.log(secondsUntil(time));
+    setSecond(secondsUntil(time));
+    setTaskNamee(taskName);
+    setReminderTime(time);
     
   };
 

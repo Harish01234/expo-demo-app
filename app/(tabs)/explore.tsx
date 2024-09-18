@@ -2,6 +2,7 @@ import { Button, Platform, Text, View } from "react-native";
 import { useState, useEffect } from "react";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import {useReminderStore} from '@/store/store';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -14,6 +15,13 @@ Notifications.setNotificationHandler({
 export default function App() {
   const [expoPushToken, setExpoPushToken] = useState("");
 
+  const {taskName, reminderTime, second} = useReminderStore();
+  console.log(taskName, reminderTime, second);
+  console.log(typeof(second));
+  
+ 
+  
+  
   useEffect(() => {
     console.log("Registering for push notifications...");
     registerForPushNotificationsAsync()
@@ -68,11 +76,10 @@ export default function App() {
     await Notifications.scheduleNotificationAsync({
       content: {
         title: "My first scheduled push notification!",
-        body: "This is my first push notification scheduled to trigger after 5 seconds",
-        sound: "default",
+        body: taskName,
       },
       trigger: {
-        seconds: 3, // trigger after 5 seconds
+        seconds: second, // trigger after 5 seconds
       },
     });
   };
